@@ -37,8 +37,44 @@ def draw():
 
   #finding distances
   distYellow=findDistance(a,b)
-  distRed=findDistance(a,b)
-  distBlue=findDistance(a,b)
+  distRed=findDistance(a,c)
+  distBlue=findDistance(b,c)
+ 
+  if distYellow==distRed and distRed==distBlue:
+    text("equilateral",100,height-100)
+  elif distRed==distYellow or distRed==distBlue or distBlue==distYellow:
+    text("isoceles",100,height-100)
+  else:
+    text("scalene",100,height-100)
+  
+  noStroke()
+  
+  midPointXyellow=(a.x+b.x)/2
+  midPointYyellow=(a.y+b.y)/2
+  fill("black")
+  rect(midPointXyellow,midPointYyellow,40,30)
+  fill("yellow")
+  text(distYellow,midPointXyellow,midPointYyellow)
+  
+  midPointXred=(a.x+c.x)/2
+  midPointYred=(a.y+c.y)/2
+  fill("black")
+  rect(midPointXred,midPointYred,40,30)
+  fill("red")
+  text(distRed,midPointXred,midPointYred)
+
+
+  
+  midPointXblue=(b.x+c.x)/2
+  midPointYblue=(b.y+c.y)/2
+  fill("black")
+  rect(midPointXblue,midPointYblue,40,30)
+  fill("blue")
+  text(distBlue,midPointXblue,midPointYblue)
+
+
+
+
 
 def findDistance(a,b):
   d=round(sqrt((a.x-b.x)**2+(a.y-b.y)**2))
