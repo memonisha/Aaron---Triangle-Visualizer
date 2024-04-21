@@ -4,9 +4,9 @@ from p5 import *
 def setup():
   createCanvas(windowWidth, windowHeight)
   global a,b,c
-  a=createMovableCircle(100,200,15)
-  b=createMovableCircle(300,100,15)
-  c=createMovableCircle(100,100,15)
+  a=createMovableCircle(100,200,15)   #green -a
+  b=createMovableCircle(300,100,15)  #blue-b
+  c=createMovableCircle(100,100,15) #orange-c
 
 #(200,300) ---green
 #(500,400)
@@ -34,7 +34,7 @@ def draw():
   stroke("blue")
   line(b.x,b.y,c.x,c.y)
 
-
+  global distYellow, distRed, distBlue
   #finding distances
   distYellow=findDistance(a,b)
   distRed=findDistance(a,c)
@@ -72,15 +72,45 @@ def draw():
   fill("blue")
   text(distBlue,midPointXblue,midPointYblue)
 
+  angles()
+  #orange dot-angleC
+  #blue dot-angle B
+  #green dot-angleA
+  fill("white")
+  text(angleA,a.x,a.y)
+  text(angleB,b.x,b.y)
+  text(angleC,c.x,c.y)
 
+  if angleA==90 or angleB==90 or angleC==90:
+    text("right-angled",100,height-50)
+  elif angleA>90 or angleB>90 or angleC>90:
+    text("obtuse-angled",100,height-50)
+  else:
+    text("acute-angled",100,height-50)
 
 
 
 def findDistance(a,b):
   d=round(sqrt((a.x-b.x)**2+(a.y-b.y)**2))
-  print(d)
   return d 
 
+def angles():
+  global angleA,angleB,angleC,distYellow,distRed,distBlue
+  c=distYellow
+  b=distRed
+  a=distBlue
+  a2=a**2
+  b2=b**2
+  c2=c**2
+  angleA=round(acos((c2+b2-a2)/(2*b*c)))
+  angleB=round(acos((c2+a2-b2)/(2*a*c)))
+  angleC=180-(angleA+angleB)
+  print(angleA,angleB,angleC)
+  
 
 
+'''
+https://jamboard.google.com/d/1Q2CvHRx-JLAaCz_HiE8SIMdO-L3ZbqPLYAKhwuKWHng/viewer?mtt=a3cev6v5p6uj&f=3
+
+'''
 
